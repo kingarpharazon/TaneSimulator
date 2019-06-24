@@ -48,6 +48,31 @@ void Dialog::on_pushButtonAdd_clicked()
     }
 }
 
+void Dialog::on_pushButtonRemove_clicked()
+{
+    // Delete the corresponding item from the list
+    _simItems.removeAt(listWidgetItems->row(listWidgetItems->currentItem()));
+
+    // Delete the currently selected item, since Qt does not delete the item
+    // when it is removed, it must be manually deleted
+    QListWidgetItem* item;
+    item = listWidgetItems->takeItem(listWidgetItems->row(listWidgetItems->currentItem()));
+    delete item;
+
+    // If the QListWidget is empty, dissable pushButtonStart
+    if(listWidgetItems->count() == 0)
+    {
+        pushButtonStart->setEnabled(false);
+    }
+}
+
+void Dialog::on_pushButtonClear_clicked()
+{
+    _simItems.clear();
+    listWidgetItems->clear();
+    pushButtonStart->setEnabled(false);
+}
+
 void Dialog::on_pushButtonStart_clicked()
 {
     QProgressDialog progressDialog;
@@ -68,7 +93,7 @@ void Dialog::on_pushButtonStart_clicked()
     // pointer. A lambda is used here to provide such pointer.
     futureWatcher.setFuture(QtConcurrent::map(_simItems, [this](SimItem& item)
     {
-        QString command = "../TaneSimulator/DepMinerTsuki.exe -f " + item.dataFile() +
+        QString command = "../TaneSimulator/DependencyMiner -f " + item.dataFile() +
             " " + item.parameters() + " -o " + item.outputFile();
         QProcess::execute(command);
     }));

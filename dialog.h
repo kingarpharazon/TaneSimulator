@@ -19,6 +19,8 @@ public:
 private slots:
     void on_pushButtonBrowse_clicked();
     void on_pushButtonAdd_clicked();
+    void on_pushButtonRemove_clicked();
+    void on_pushButtonClear_clicked();
     void on_pushButtonStart_clicked();
 
 private:
