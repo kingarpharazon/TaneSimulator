@@ -45,7 +45,7 @@ void Dialog::on_pushButtonAdd_clicked()
 
         _simItems << item;
 
-        listWidgetItems->addItem(lineEditDataFile->text());
+        listWidgetItems->addItem(lineEditOutputFile->text());
 
         pushButtonStart->setEnabled(true);
     }
