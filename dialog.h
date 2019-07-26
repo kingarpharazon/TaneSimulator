@@ -22,6 +22,7 @@ private slots:
     void on_pushButtonRemove_clicked();
     void on_pushButtonClear_clicked();
     void on_pushButtonStart_clicked();
+    void on_lineEditParameters_textChanged();
 
 private:
     void processItem(SimItem& simItem);

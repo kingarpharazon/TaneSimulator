@@ -15,13 +15,16 @@ Dialog::Dialog(QWidget *parent) :
 
 void Dialog::on_pushButtonBrowse_clicked()
 {
-    QString file = QFileDialog::getOpenFileName(nullptr, QObject::tr("Select a file"),
+    QString filename = QFileDialog::getOpenFileName(nullptr, QObject::tr("Select a file"),
                                                 "", tr("csv (*.csv)"), nullptr, nullptr);
 
-    if(!file.isEmpty())
+    if(!filename.isEmpty())
     {
-        _filename = file;
-        lineEditDataFile->setText(_filename);
+        QFileInfo fileInfo(filename);
+
+        _filename = filename;
+        lineEditDataFile->setText(filename);
+        lineEditOutputFile->setText(fileInfo.baseName());
     }
 }
 
@@ -105,4 +108,16 @@ void Dialog::on_pushButtonStart_clicked()
 
     // Query the future to check if it was cancelled
     qDebug() << "Canceled?" << futureWatcher.future().isCanceled();
+}
+
+void Dialog::on_lineEditParameters_textChanged()
+{
+    if(!lineEditDataFile->text().isEmpty())
+    {
+        QFileInfo fileInfo(lineEditDataFile->text());
+        QString outputfileName = fileInfo.baseName() + '_' + lineEditParameters->text();
+        outputfileName.replace(' ', '_');
+
+        lineEditOutputFile->setText(outputfileName);
+    }
 }
