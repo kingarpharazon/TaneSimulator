@@ -16,7 +16,7 @@ Dialog::Dialog(QWidget *parent) :
 void Dialog::on_pushButtonBrowse_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(nullptr, QObject::tr("Select a file"),
-                                                "", tr("csv (*.csv)"), nullptr, nullptr);
+                                                "", tr("Data files (*.csv *.data *.txt)"), nullptr, nullptr);
 
     if(!filename.isEmpty())
     {
