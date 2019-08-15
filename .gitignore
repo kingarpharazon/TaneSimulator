@@ -8,6 +8,7 @@ Thumbs.db
 *.vspscc
 *_i.c
 *_p.c
+ui_*
 *.ncb
 *.suo
 *.sln.docstates
@@ -34,11 +35,13 @@ _ReSharper*/
 # QtCreator project files
 *.pro.user
 *.pro.user*
+*.stash
 
 # Visual Studio files
 *.sln
 *.vcxproj
 *.vcxproj.filters
+*.db
 
 # Backup and swap files
 *~
